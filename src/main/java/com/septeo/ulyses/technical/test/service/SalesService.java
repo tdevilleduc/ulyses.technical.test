@@ -1,10 +1,7 @@
 package com.septeo.ulyses.technical.test.service;
 
-import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.entity.Sales;
-import com.septeo.ulyses.technical.test.entity.Vehicle;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 

@@ -1,6 +1,5 @@
 package com.septeo.ulyses.technical.test.service;
 
-import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.entity.Vehicle;
 
 import java.util.List;

@@ -1,15 +1,12 @@
 package com.septeo.ulyses.technical.test.repository;
 
-import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.entity.Sales;
-import com.septeo.ulyses.technical.test.entity.Vehicle;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
