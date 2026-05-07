@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,18 +25,18 @@ public class VehicleRepositoryImpl implements VehicleRepository {
     @Override
     public List<Vehicle> findAll() {
         String stringQuery = "SELECT v FROM Vehicle v";
-        Query query = entityManager.createQuery(stringQuery);
-        return query.getResultList();
+        TypedQuery<Vehicle> typedQuery = entityManager.createQuery(stringQuery, Vehicle.class);
+        return typedQuery.getResultList();
     }
 
     @Override
     public Optional<Vehicle> findById(Long id) {
         String stringQuery = "SELECT v FROM Vehicle v WHERE v.id = :id";
-        Query query = entityManager.createQuery(stringQuery);
-        query.setParameter("id", id);
+        TypedQuery<Vehicle> typedQuery = entityManager.createQuery(stringQuery, Vehicle.class);
+        typedQuery.setParameter("id", id);
 
         try {
-            return Optional.of((Vehicle) query.getSingleResult());
+            return Optional.of(typedQuery.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
         }

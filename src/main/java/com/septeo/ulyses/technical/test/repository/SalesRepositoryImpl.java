@@ -4,7 +4,8 @@ import com.septeo.ulyses.technical.test.entity.Sales;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,18 +24,18 @@ public class SalesRepositoryImpl implements SalesRepository {
     @Override
     public List<Sales> findAll() {
         String stringQuery = "SELECT s FROM Sales s";
-        Query query = entityManager.createQuery(stringQuery);
-        return query.getResultList();
+        TypedQuery<Sales> typedQuery = entityManager.createQuery(stringQuery, Sales.class);
+        return typedQuery.getResultList();
     }
 
     @Override
     public Optional<Sales> findById(Long id) {
         String stringQuery = "SELECT s FROM Sales s WHERE s.id = :id";
-        Query query = entityManager.createQuery(stringQuery);
-        query.setParameter("id", id);
+        TypedQuery<Sales> typedQuery = entityManager.createQuery(stringQuery, Sales.class);
+        typedQuery.setParameter("id", id);
 
         try {
-            return Optional.of((Sales) query.getSingleResult());
+            return Optional.of(typedQuery.getSingleResult());
         } catch (NoResultException e) {
             return Optional.empty();
         }
