@@ -25,4 +25,11 @@ public interface SalesService {
      */
     Optional<Sales> getSalesById(Long id);
 
+    /**
+     * Return all sales for a given brand.
+     * @param brandId the ID of the brand to find sales for
+     * @return a list of sales for the given brand
+     */
+    List<Sales> getSalesByBrandId(Long brandId);
+
 }

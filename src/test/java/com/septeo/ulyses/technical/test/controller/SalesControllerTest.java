@@ -34,7 +34,8 @@ class SalesControllerTest {
         when(salesService.getAllSales()).thenReturn(List.of());
 
         mockMvc.perform(get("/api/sales"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+            ;
     }
 
     @Test
@@ -45,7 +46,9 @@ class SalesControllerTest {
         when(salesService.getSalesById(1L)).thenReturn(Optional.of(sales));
 
         mockMvc.perform(get("/api/sales/1"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isNotEmpty())
+            ;
     }
 
     @Test
@@ -54,5 +57,28 @@ class SalesControllerTest {
 
         mockMvc.perform(get("/api/sales/999"))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void testGetSalesByBrandId() throws Exception {
+        Brand brand = new Brand(1L, "Renault", "French automobile manufacturer", List.of());
+        Vehicle vehicle = new Vehicle(1L, brand, "Clio", "2022", "Red");
+        Sales sales = new Sales(1L, brand, vehicle, LocalDate.of(2025, 1, 1), new BigDecimal("14850.75"));
+        when(salesService.getSalesByBrandId(1L)).thenReturn(List.of(sales));
+
+        mockMvc.perform(get("/api/sales/brands/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isNotEmpty())
+            ;
+    }
+
+    @Test
+    void testGetSalesByBrandIdEmpty() throws Exception {
+        when(salesService.getSalesByBrandId(999L)).thenReturn(List.of());
+
+        mockMvc.perform(get("/api/sales/brands/999"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty())
+            ;
     }
 }

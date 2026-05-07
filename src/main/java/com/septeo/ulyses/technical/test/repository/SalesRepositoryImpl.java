@@ -40,4 +40,12 @@ public class SalesRepositoryImpl implements SalesRepository {
             return Optional.empty();
         }
     }
+
+    @Override
+    public List<Sales> findByBrandId(Long brandId) {
+        String stringQuery = "SELECT s FROM Sales s WHERE s.brand.id = :brandId";
+        TypedQuery<Sales> typedQuery = entityManager.createQuery(stringQuery, Sales.class);
+        typedQuery.setParameter("brandId", brandId);
+        return typedQuery.getResultList();
+    }
 }
