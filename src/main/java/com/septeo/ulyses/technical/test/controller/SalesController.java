@@ -35,6 +35,11 @@ public class SalesController {
         return ResponseEntity.ok(salesService.getSalesByBrandId(brandId));
     }
 
+    @GetMapping("/vehicles/{vehicleId}")
+    public ResponseEntity<List<Sales>> getSalesByVehicleId(@PathVariable Long vehicleId) {
+        return ResponseEntity.ok(salesService.getSalesByVehicleId(vehicleId));
+    }
+
     // TODO: implement here your endpoints
-    
+
 }

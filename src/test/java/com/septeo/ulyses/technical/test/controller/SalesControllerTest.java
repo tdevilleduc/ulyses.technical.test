@@ -81,4 +81,27 @@ class SalesControllerTest {
                 .andExpect(jsonPath("$").isEmpty())
             ;
     }
+
+    @Test
+    void testGetSalesByVehicleId() throws Exception {
+        Brand brand = new Brand(1L, "Renault", "French automobile manufacturer", List.of());
+        Vehicle vehicle = new Vehicle(1L, brand, "Clio", "2022", "Red");
+        Sales sales = new Sales(1L, brand, vehicle, LocalDate.of(2025, 1, 1), new BigDecimal("14850.75"));
+        when(salesService.getSalesByVehicleId(1L)).thenReturn(List.of(sales));
+
+        mockMvc.perform(get("/api/sales/vehicles/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isNotEmpty())
+            ;
+    }
+
+    @Test
+    void testGetSalesByVehicleIdEmpty() throws Exception {
+        when(salesService.getSalesByVehicleId(999L)).thenReturn(List.of());
+
+        mockMvc.perform(get("/api/sales/vehicles/999"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isEmpty())
+            ;
+    }
 }

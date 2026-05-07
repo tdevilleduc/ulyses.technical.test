@@ -33,4 +33,11 @@ public interface SalesRepository {
      */
     List<Sales> findByBrandId(Long brandId);
 
+    /**
+     * Find all sales for a given vehicle ID.
+     * @param vehicleId the ID of the vehicle to find sales for
+     * @return a list of sales for the given vehicle
+     */
+    List<Sales> findByVehicleId(Long vehicleId);
+
 }

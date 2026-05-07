@@ -48,4 +48,12 @@ public class SalesRepositoryImpl implements SalesRepository {
         typedQuery.setParameter("brandId", brandId);
         return typedQuery.getResultList();
     }
+
+    @Override
+    public List<Sales> findByVehicleId(Long vehicleId) {
+        String stringQuery = "SELECT s FROM Sales s WHERE s.vehicle.id = :vehicleId";
+        TypedQuery<Sales> typedQuery = entityManager.createQuery(stringQuery, Sales.class);
+        typedQuery.setParameter("vehicleId", vehicleId);
+        return typedQuery.getResultList();
+    }
 }

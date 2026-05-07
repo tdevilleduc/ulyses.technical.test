@@ -32,4 +32,11 @@ public interface SalesService {
      */
     List<Sales> getSalesByBrandId(Long brandId);
 
+    /**
+     * Return all sales for a given vehicle.
+     * @param vehicleId the ID of the vehicle to find sales for
+     * @return a list of sales for the given vehicle
+     */
+    List<Sales> getSalesByVehicleId(Long vehicleId);
+
 }
