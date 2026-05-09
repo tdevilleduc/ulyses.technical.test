@@ -1,14 +1,11 @@
 info:
   name: create /brands
   type: http
-  seq: 3
+  seq: 2
 
 http:
   method: POST
   url: http://localhost:8080/api/brands
-  headers:
-    - name: X-XSRF-TOKEN
-      value: "{{xsrf_token}}"
   body:
     type: json
     data: |-
