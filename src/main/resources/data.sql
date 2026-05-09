@@ -1,4 +1,14 @@
 -- Insert Brands
+INSERT INTO users (username, password) VALUES ('tdevilleduc', '$2y$10$CHQFmkodZS9XVk6tqN1ZS.v38WxSf8GdR/TjSS.QomNb7MXKMDSY.');
+INSERT INTO users (username, password) VALUES ('rcarmona', '$2y$10$aabCrsURzcLNBQokYKlrKesoQPiUjCwqsB3RmInHFMjHdpdEoRJ66');
+INSERT INTO users (username, password) VALUES ('admin', '$2y$10$dZGSZ9UBsFfQt4YnJwt8suZbaGvU0l0nRN9kcAzul3FdmGrlgUixe');
+
+INSERT INTO user_roles (username, roles) VALUES (1, 'USER');
+INSERT INTO user_roles (username, roles) VALUES (2, 'USER');
+INSERT INTO user_roles (username, roles) VALUES (2, 'ADMIN');
+INSERT INTO user_roles (username, roles) VALUES (3, 'ADMIN');
+
+-- Insert Brands
 INSERT INTO brands (name, description) VALUES ('Renault', 'French automobile manufacturer');
 INSERT INTO brands (name, description) VALUES ('Opel', 'German automobile manufacturer');
 INSERT INTO brands (name, description) VALUES ('Volkswagen', 'German automobile manufacturer');
