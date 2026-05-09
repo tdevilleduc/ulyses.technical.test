@@ -1,11 +1,14 @@
 info:
   name: update /vehicles/{id}
   type: http
-  seq: 4
+  seq: 5
 
 http:
   method: PUT
   url: http://localhost:8080/api/vehicles/10
+  headers:
+    - name: X-XSRF-TOKEN
+      value: "{{xsrf_token}}"
   body:
     type: json
     data: |-

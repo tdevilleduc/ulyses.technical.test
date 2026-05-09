@@ -6,7 +6,6 @@ info:
 http:
   method: GET
   url: http://localhost:8080/api/sales/vehicles/3
-  auth: inherit
 
 settings:
   encodeUrl: true
