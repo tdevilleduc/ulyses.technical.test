@@ -11,11 +11,14 @@ import java.util.Optional;
 public interface SalesService {
 
     /**
-     * Get all sales.
+     * Get all sales with pagination.
      *
-     * @return a list of all sales
+     * @param page the page number for pagination (optional)
+     * @return a list of all sales, paginated with 10 sales per page.
+     *         If page is provided, return the corresponding page of sales. 
+     *         If page is unset or less than 0, return the first page.
      */
-    List<Sales> getAllSales();
+    List<Sales> getSalesByPage(Integer page);
 
     /**
      * Get a sales by its ID.

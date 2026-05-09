@@ -16,6 +16,7 @@ public interface SalesRepository {
      *
      * @return a list of all sales
      */
+    @Deprecated(since = "2024-06", forRemoval = true)
     List<Sales> findAll();
 
     /**
@@ -40,4 +41,10 @@ public interface SalesRepository {
      */
     List<Sales> findByVehicleId(Long vehicleId);
 
+    /**
+     * Find all sales with pagination. 
+     * @param page the page number to retrieve (0-based index)
+     * @return a list of sales for the given page
+     */
+    List<Sales> findByPage(Integer page);
 }

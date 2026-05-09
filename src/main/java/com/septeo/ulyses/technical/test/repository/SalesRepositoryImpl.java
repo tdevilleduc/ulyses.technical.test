@@ -6,6 +6,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class SalesRepositoryImpl implements SalesRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Value("${sales.page.size:10}")
+    private int pageSize;
 
     @Override
     public List<Sales> findAll() {
@@ -54,6 +58,15 @@ public class SalesRepositoryImpl implements SalesRepository {
         String stringQuery = "SELECT s FROM Sales s WHERE s.vehicle.id = :vehicleId";
         TypedQuery<Sales> typedQuery = entityManager.createQuery(stringQuery, Sales.class);
         typedQuery.setParameter("vehicleId", vehicleId);
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<Sales> findByPage(Integer page) {
+        String stringQuery = "SELECT s FROM Sales s";
+        TypedQuery<Sales> typedQuery = entityManager.createQuery(stringQuery, Sales.class);
+        typedQuery.setFirstResult(page * pageSize);
+        typedQuery.setMaxResults(pageSize);
         return typedQuery.getResultList();
     }
 }

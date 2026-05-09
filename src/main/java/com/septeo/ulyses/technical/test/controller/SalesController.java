@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,8 +20,10 @@ public class SalesController {
     private SalesService salesService;
 
     @GetMapping
-    public ResponseEntity<List<Sales>> getAllSales() {
-        return ResponseEntity.ok(salesService.getAllSales());
+    public ResponseEntity<List<Sales>> getSalesByPage(
+        @RequestParam(value = "page", required = false) Integer page
+    ) {
+        return ResponseEntity.ok(salesService.getSalesByPage(page));
     }
 
     @GetMapping("/{id}")

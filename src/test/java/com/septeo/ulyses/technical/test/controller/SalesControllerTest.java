@@ -30,8 +30,8 @@ class SalesControllerTest {
     private SalesService salesService;
 
     @Test
-    void testGetAllSales() throws Exception {
-        when(salesService.getAllSales()).thenReturn(List.of());
+    void testGetSalesByPage() throws Exception {
+        when(salesService.getSalesByPage(0)).thenReturn(List.of());
 
         mockMvc.perform(get("/api/sales"))
                 .andExpect(status().isOk())

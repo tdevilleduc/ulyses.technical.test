@@ -24,8 +24,11 @@ public class SalesServiceImpl implements SalesService {
      * {@inheritDoc}
      */
     @Override
-    public List<Sales> getAllSales() {
-        return salesRepository.findAll();
+    public List<Sales> getSalesByPage(Integer page) {
+        if (page == null || page < 0) {
+            return salesRepository.findByPage(0);
+        }
+        return salesRepository.findByPage(page - 1);
     }
 
     /**
