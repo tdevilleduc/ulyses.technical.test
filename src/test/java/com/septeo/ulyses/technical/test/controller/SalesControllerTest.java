@@ -64,7 +64,7 @@ class SalesControllerTest {
         Brand brand = new Brand(1L, "Renault", "French automobile manufacturer", List.of());
         Vehicle vehicle = new Vehicle(1L, brand, "Clio", "2022", "Red");
         Sales sales = new Sales(1L, brand, vehicle, LocalDate.of(2025, 1, 1), new BigDecimal("14850.75"));
-        when(salesService.getSalesByBrandId(1L)).thenReturn(List.of(sales));
+        when(salesService.getSalesByBrandId(1L, null)).thenReturn(List.of(sales));
 
         mockMvc.perform(get("/api/sales/brands/1"))
                 .andExpect(status().isOk())
@@ -74,7 +74,7 @@ class SalesControllerTest {
 
     @Test
     void testGetSalesByBrandIdEmpty() throws Exception {
-        when(salesService.getSalesByBrandId(999L)).thenReturn(List.of());
+        when(salesService.getSalesByBrandId(999L, null)).thenReturn(List.of());
 
         mockMvc.perform(get("/api/sales/brands/999"))
                 .andExpect(status().isOk())
@@ -87,7 +87,7 @@ class SalesControllerTest {
         Brand brand = new Brand(1L, "Renault", "French automobile manufacturer", List.of());
         Vehicle vehicle = new Vehicle(1L, brand, "Clio", "2022", "Red");
         Sales sales = new Sales(1L, brand, vehicle, LocalDate.of(2025, 1, 1), new BigDecimal("14850.75"));
-        when(salesService.getSalesByVehicleId(1L)).thenReturn(List.of(sales));
+        when(salesService.getSalesByVehicleId(1L, null)).thenReturn(List.of(sales));
 
         mockMvc.perform(get("/api/sales/vehicles/1"))
                 .andExpect(status().isOk())
@@ -97,7 +97,7 @@ class SalesControllerTest {
 
     @Test
     void testGetSalesByVehicleIdEmpty() throws Exception {
-        when(salesService.getSalesByVehicleId(999L)).thenReturn(List.of());
+        when(salesService.getSalesByVehicleId(999L, null)).thenReturn(List.of());
 
         mockMvc.perform(get("/api/sales/vehicles/999"))
                 .andExpect(status().isOk())

@@ -31,15 +31,17 @@ public interface SalesService {
     /**
      * Return all sales for a given brand.
      * @param brandId the ID of the brand to find sales for
+     * @param page the page number for pagination (optional)
      * @return a list of sales for the given brand
      */
-    List<Sales> getSalesByBrandId(Long brandId);
+    List<Sales> getSalesByBrandId(Long brandId, Integer page);
 
     /**
      * Return all sales for a given vehicle.
      * @param vehicleId the ID of the vehicle to find sales for
+     * @param page the page number for pagination (optional)
      * @return a list of sales for the given vehicle
      */
-    List<Sales> getSalesByVehicleId(Long vehicleId);
+    List<Sales> getSalesByVehicleId(Long vehicleId, Integer page);
 
 }

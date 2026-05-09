@@ -12,14 +12,6 @@ import java.util.Optional;
 @Repository
 public interface SalesRepository {
     /**
-     * Find all sales.
-     *
-     * @return a list of all sales
-     */
-    @Deprecated(since = "2024-06", forRemoval = true)
-    List<Sales> findAll();
-
-    /**
      * Find a sale by its ID.
      *
      * @param id the ID of the sale to find
@@ -30,20 +22,22 @@ public interface SalesRepository {
     /**
      * Find all sales for a given brand ID.
      * @param brandId the ID of the brand to find sales for
-     * @return a list of sales for the given brand
+     * @param page the page number to retrieve (0-based index)
+     * @return a list of sales for the given brand and for the given page
      */
-    List<Sales> findByBrandId(Long brandId);
+    List<Sales> findByBrandId(Long brandId, Integer page);
 
     /**
      * Find all sales for a given vehicle ID.
      * @param vehicleId the ID of the vehicle to find sales for
-     * @return a list of sales for the given vehicle
+     * @param page the page number to retrieve (0-based index)
+     * @return a list of sales for the given vehicle and for the given page
      */
-    List<Sales> findByVehicleId(Long vehicleId);
+    List<Sales> findByVehicleId(Long vehicleId, Integer page);
 
     /**
      * Find all sales with pagination. 
-     * @param page the page number to retrieve (0-based index)
+     * @param page the page number to retrieve (0-based index) (optional)
      * @return a list of sales for the given page
      */
     List<Sales> findByPage(Integer page);

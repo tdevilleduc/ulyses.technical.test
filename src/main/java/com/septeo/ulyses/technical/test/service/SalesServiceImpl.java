@@ -43,15 +43,21 @@ public class SalesServiceImpl implements SalesService {
      * {@inheritDoc}
      */
     @Override
-    public List<Sales> getSalesByBrandId(Long brandId) {
-        return salesRepository.findByBrandId(brandId);
+    public List<Sales> getSalesByBrandId(Long brandId, Integer page) {
+        if (page == null || page < 0) {
+            return salesRepository.findByBrandId(brandId, 0);
+        }
+        return salesRepository.findByBrandId(brandId, page - 1);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<Sales> getSalesByVehicleId(Long vehicleId) {
-        return salesRepository.findByVehicleId(vehicleId);
+    public List<Sales> getSalesByVehicleId(Long vehicleId, Integer page) {
+        if (page == null || page < 0) {
+            return salesRepository.findByVehicleId(vehicleId,0);
+        }
+        return salesRepository.findByVehicleId(vehicleId, page - 1);
     }
 }

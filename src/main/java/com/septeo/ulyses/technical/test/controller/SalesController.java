@@ -34,13 +34,19 @@ public class SalesController {
     }
 
     @GetMapping("/brands/{brandId}")
-    public ResponseEntity<List<Sales>> getSalesByBrandId(@PathVariable Long brandId) {
-        return ResponseEntity.ok(salesService.getSalesByBrandId(brandId));
+    public ResponseEntity<List<Sales>> getSalesByBrandId(
+        @PathVariable Long brandId,
+        @RequestParam(value = "page", required = false) Integer page
+    ) {
+        return ResponseEntity.ok(salesService.getSalesByBrandId(brandId, page));
     }
 
     @GetMapping("/vehicles/{vehicleId}")
-    public ResponseEntity<List<Sales>> getSalesByVehicleId(@PathVariable Long vehicleId) {
-        return ResponseEntity.ok(salesService.getSalesByVehicleId(vehicleId));
+    public ResponseEntity<List<Sales>> getSalesByVehicleId(
+        @PathVariable Long vehicleId,
+        @RequestParam(value = "page", required = false) Integer page
+    ) {
+        return ResponseEntity.ok(salesService.getSalesByVehicleId(vehicleId, page));
     }
 
     // TODO: implement here your endpoints
