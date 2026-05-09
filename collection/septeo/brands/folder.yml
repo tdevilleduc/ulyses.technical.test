@@ -1,0 +1,7 @@
+info:
+  name: brands
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit

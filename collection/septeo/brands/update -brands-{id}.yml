@@ -1,0 +1,22 @@
+info:
+  name: update /brands/{id}
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: http://localhost:8080/api/brands/4
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Tesla",
+        "description": "United States automobile manufacturer"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

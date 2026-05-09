@@ -1,0 +1,22 @@
+info:
+  name: create /brands
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8080/api/brands
+  body:
+    type: json
+    data: |-
+      {
+        "name": "Tesla",
+        "description": "American automobile manufacturer"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
