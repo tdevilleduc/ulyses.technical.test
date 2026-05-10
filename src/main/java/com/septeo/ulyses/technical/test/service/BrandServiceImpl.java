@@ -45,7 +45,7 @@ public class BrandServiceImpl implements BrandService {
      * {@inheritDoc}
      */
     @Override
-    @CacheEvict(value = "brands", allEntries = true)
+    @CacheEvict(value = "brands", key = "#id")
     public Brand saveBrand(Brand brand) {
         return brandRepository.save(brand);
     }
@@ -54,7 +54,7 @@ public class BrandServiceImpl implements BrandService {
      * {@inheritDoc}
      */
     @Override
-    @CacheEvict(value = "brands", allEntries = true)
+    @CacheEvict(value = "brands", key = "#id")
     public void deleteBrand(Long id) {
         brandRepository.deleteById(id);
     }
