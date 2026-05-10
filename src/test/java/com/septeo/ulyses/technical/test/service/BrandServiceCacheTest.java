@@ -6,17 +6,16 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cache.CacheManager;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.repository.BrandRepository;
+import com.septeo.ulyses.technical.test.util.CustomCache;
 
 @SpringBootTest
 class BrandServiceCacheTest {
@@ -25,19 +24,23 @@ class BrandServiceCacheTest {
     private BrandService brandService;
 
     @Autowired
-    private CacheManager cacheManager;
+    private CustomCache<Long, Brand> brandCache;
 
     @MockitoBean
     private BrandRepository brandRepository;
 
     @BeforeEach
     void clearCache() {
-        Objects.requireNonNull(cacheManager.getCache("brands")).clear();
+        brandCache.reset();
     }
 
     @Test
     void getAllBrands_shouldHitCacheOnSecondCall() {
-        when(brandRepository.findAll()).thenReturn(List.of(new Brand()));
+        Brand brand = new Brand();
+        brand.setId(1L);
+        brand.setName("Test Brand");
+        brand.setDescription("Test Description");
+        when(brandRepository.findAll()).thenReturn(List.of(brand));
 
         brandService.getAllBrands();
         brandService.getAllBrands();
