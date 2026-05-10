@@ -1,0 +1,14 @@
+info:
+  name: get /sales/vehicles/anotherBestSelling
+  type: http
+  seq: 8
+
+http:
+  method: GET
+  url: http://localhost:8080/api/sales/vehicles/anotherBestSelling
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
