@@ -3,7 +3,6 @@ package com.septeo.ulyses.technical.test.service;
 import com.septeo.ulyses.technical.test.entity.Brand;
 import com.septeo.ulyses.technical.test.repository.BrandRepository;
 
-import org.hibernate.annotations.Cache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
