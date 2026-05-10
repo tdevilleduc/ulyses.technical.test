@@ -53,5 +53,17 @@ public interface SalesService {
      * @param endDate the end date of the sales period to consider
      * @return a list of the 5 best-selling vehicles, ordered by quantity sold in descending order.
      */ 
-    List<VehicleSales> getBestSellingVehicles(LocalDate startDate, LocalDate endDate);
+    List<VehicleSales> getBestSellingVehicles(LocalDate startDate, LocalDate endDate);	
+
+    /**
+     * Return the top 5 best-selling vehicles based on the total quantity sold.
+     * The method should consider sales within a specified date range.
+     * 
+     * This method is an alternative implementation to getBestSellingVehicles and should return the same results.
+     * However, it should be implemented using a much better approach in terms of performance and efficiency, especially when dealing with large datasets.
+     * @param startDate the start date of the sales period to consider
+     * @param endDate the end date of the sales period to consider
+     * @return a list of the 5 best-selling vehicles, ordered by quantity sold in descending order.
+     */ 
+    List<VehicleSales> getAnotherBestSellingVehicles(LocalDate startDate, LocalDate endDate);
 }

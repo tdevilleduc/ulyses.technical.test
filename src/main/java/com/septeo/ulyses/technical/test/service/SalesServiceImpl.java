@@ -101,4 +101,12 @@ public class SalesServiceImpl implements SalesService {
             && !date.isBefore(start)
             && !date.isAfter(end);
     }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<VehicleSales> getAnotherBestSellingVehicles(LocalDate startDate, LocalDate endDate) {
+        return salesRepository.findBestSales(startDate, endDate);
+    }
 }

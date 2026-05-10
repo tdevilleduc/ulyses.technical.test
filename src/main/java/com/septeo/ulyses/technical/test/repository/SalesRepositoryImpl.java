@@ -1,6 +1,8 @@
 package com.septeo.ulyses.technical.test.repository;
 
 import com.septeo.ulyses.technical.test.entity.Sales;
+import com.septeo.ulyses.technical.test.entity.VehicleSales;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -9,6 +11,7 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,5 +79,19 @@ public class SalesRepositoryImpl implements SalesRepository {
         typedQuery.setFirstResult(page * pageSize);
         typedQuery.setMaxResults(pageSize);
         return typedQuery;
+    }
+
+    @Override
+    public List<VehicleSales> findBestSales(LocalDate startDate, LocalDate endDate) {
+        String stringQuery = "SELECT new com.septeo.ulyses.technical.test.entity.VehicleSales(s.vehicle.id, COUNT(s)) " +
+                "FROM Sales s " +
+                "WHERE s.saleDate >= :startDate AND s.saleDate <= :endDate " +
+                "GROUP BY s.vehicle.id " +
+                "ORDER BY COUNT(s) DESC";
+        TypedQuery<VehicleSales> typedQuery = entityManager.createQuery(stringQuery, VehicleSales.class);
+        typedQuery.setMaxResults(5);
+        typedQuery.setParameter("startDate", startDate);
+        typedQuery.setParameter("endDate", endDate);
+        return typedQuery.getResultList();
     }
 }

@@ -1,8 +1,11 @@
 package com.septeo.ulyses.technical.test.repository;
 
 import com.septeo.ulyses.technical.test.entity.Sales;
+import com.septeo.ulyses.technical.test.entity.VehicleSales;
+
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,4 +44,12 @@ public interface SalesRepository {
      * @return a list of sales for the given page
      */
     List<Sales> findByPage(Integer page);
+
+    /**
+     * Find the top 5 best sales
+     * @param startDate the start date of the sales period to consider
+     * @param endDate the end date of the sales period to consider
+     * @return a list of the 5 best-selling vehicles for the given date range
+     */
+    List<VehicleSales> findBestSales(LocalDate startDate, LocalDate endDate);
 }

@@ -73,4 +73,26 @@ public class SalesController {
 
         return ResponseEntity.ok(salesService.getBestSellingVehicles(startDate, endDate));
     }
+
+    @GetMapping("/vehicles/anotherBestSelling")
+    public ResponseEntity<List<VehicleSales>> getAnotherBestSellingVehicles(
+        @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDateParam,
+        @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDateParam
+    ) {
+
+        LocalDate startDate = (startDateParam != null) ? startDateParam : LocalDate.of(1970, 1, 1); // 1 Jan 1970
+        LocalDate endDate = (endDateParam != null) ? endDateParam : LocalDate.now(); // Current date
+
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException(
+                String.format("endDate (%s) must be after startDate (%s)", endDate, startDate)
+            );
+        }
+
+        if (startDate.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("startDate cannot be in the future");
+        }
+
+        return ResponseEntity.ok(salesService.getAnotherBestSellingVehicles(startDate, endDate));
+    }
 }
