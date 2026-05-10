@@ -1,7 +1,9 @@
 package com.septeo.ulyses.technical.test.service;
 
 import com.septeo.ulyses.technical.test.entity.Sales;
+import com.septeo.ulyses.technical.test.entity.VehicleSales;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,4 +46,12 @@ public interface SalesService {
      */
     List<Sales> getSalesByVehicleId(Long vehicleId, Integer page);
 
+    /**
+     * Return the top 5 best-selling vehicles based on the total quantity sold.
+     * The method should consider sales within a specified date range.
+     * @param startDate the start date of the sales period to consider
+     * @param endDate the end date of the sales period to consider
+     * @return a list of the 5 best-selling vehicles, ordered by quantity sold in descending order.
+     */ 
+    List<VehicleSales> getBestSellingVehicles(LocalDate startDate, LocalDate endDate);
 }

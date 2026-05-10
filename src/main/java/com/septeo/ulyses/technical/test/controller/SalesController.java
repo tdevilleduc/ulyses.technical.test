@@ -1,8 +1,10 @@
 package com.septeo.ulyses.technical.test.controller;
 
 import com.septeo.ulyses.technical.test.entity.Sales;
+import com.septeo.ulyses.technical.test.entity.VehicleSales;
 import com.septeo.ulyses.technical.test.service.SalesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -49,6 +52,25 @@ public class SalesController {
         return ResponseEntity.ok(salesService.getSalesByVehicleId(vehicleId, page));
     }
 
-    // TODO: implement here your endpoints
+    @GetMapping("/vehicles/bestSelling")
+    public ResponseEntity<List<VehicleSales>> getBestSellingVehicles(
+        @RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDateParam,
+        @RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDateParam
+    ) {
 
+        LocalDate startDate = (startDateParam != null) ? startDateParam : LocalDate.of(1970, 1, 1); // 1 Jan 1970
+        LocalDate endDate = (endDateParam != null) ? endDateParam : LocalDate.now(); // Current date
+
+        if (startDate.isAfter(endDate)) {
+            throw new IllegalArgumentException(
+                String.format("endDate (%s) must be after startDate (%s)", endDate, startDate)
+            );
+        }
+
+        if (startDate.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("startDate cannot be in the future");
+        }
+
+        return ResponseEntity.ok(salesService.getBestSellingVehicles(startDate, endDate));
+    }
 }
