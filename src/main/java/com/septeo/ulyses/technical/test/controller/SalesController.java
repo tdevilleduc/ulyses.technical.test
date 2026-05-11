@@ -3,6 +3,9 @@ package com.septeo.ulyses.technical.test.controller;
 import com.septeo.ulyses.technical.test.entity.Sales;
 import com.septeo.ulyses.technical.test.entity.VehicleSales;
 import com.septeo.ulyses.technical.test.service.SalesService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/sales")
 public class SalesController {
+
+    private static final Logger logger = LoggerFactory.getLogger(SalesController.class);
 
     @Autowired
     private SalesService salesService;
@@ -62,13 +67,13 @@ public class SalesController {
         LocalDate endDate = (endDateParam != null) ? endDateParam : LocalDate.now(); // Current date
 
         if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException(
-                String.format("endDate (%s) must be after startDate (%s)", endDate, startDate)
-            );
+            logger.error("endDate {} must be after startDate {}", endDate, startDate);
+            return ResponseEntity.badRequest().build();
         }
 
         if (startDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("startDate cannot be in the future");
+            logger.error("startDate {} cannot be in the future", startDate);
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok(salesService.getBestSellingVehicles(startDate, endDate));
@@ -84,13 +89,13 @@ public class SalesController {
         LocalDate endDate = (endDateParam != null) ? endDateParam : LocalDate.now(); // Current date
 
         if (startDate.isAfter(endDate)) {
-            throw new IllegalArgumentException(
-                String.format("endDate (%s) must be after startDate (%s)", endDate, startDate)
-            );
+            logger.error("endDate {} must be after startDate {}", endDate, startDate);
+            return ResponseEntity.badRequest().build();
         }
 
         if (startDate.isAfter(LocalDate.now())) {
-            throw new IllegalArgumentException("startDate cannot be in the future");
+            logger.error("startDate {} cannot be in the future", startDate);
+            return ResponseEntity.badRequest().build();
         }
 
         return ResponseEntity.ok(salesService.getAnotherBestSellingVehicles(startDate, endDate));
