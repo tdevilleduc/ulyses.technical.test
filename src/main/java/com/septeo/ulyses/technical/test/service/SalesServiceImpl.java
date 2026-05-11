@@ -32,7 +32,7 @@ public class SalesServiceImpl implements SalesService {
      */
     @Override
     public List<Sales> getSalesByPage(Integer page) {
-        if (page == null || page < 0) {
+        if (page == null || page < 1) {
             return salesRepository.findByPage(0);
         }
         return salesRepository.findByPage(page - 1);
@@ -51,7 +51,7 @@ public class SalesServiceImpl implements SalesService {
      */
     @Override
     public List<Sales> getSalesByBrandId(Long brandId, Integer page) {
-        if (page == null || page < 0) {
+        if (page == null || page < 1) {
             return salesRepository.findByBrandId(brandId, 0);
         }
         return salesRepository.findByBrandId(brandId, page - 1);
@@ -62,7 +62,7 @@ public class SalesServiceImpl implements SalesService {
      */
     @Override
     public List<Sales> getSalesByVehicleId(Long vehicleId, Integer page) {
-        if (page == null || page < 0) {
+        if (page == null || page < 1) {
             return salesRepository.findByVehicleId(vehicleId,0);
         }
         return salesRepository.findByVehicleId(vehicleId, page - 1);
