@@ -3,10 +3,10 @@ INSERT INTO users (username, password) VALUES ('tdevilleduc', '$2y$10$CHQFmkodZS
 INSERT INTO users (username, password) VALUES ('rcarmona', '$2y$10$aabCrsURzcLNBQokYKlrKesoQPiUjCwqsB3RmInHFMjHdpdEoRJ66');
 INSERT INTO users (username, password) VALUES ('admin', '$2y$10$dZGSZ9UBsFfQt4YnJwt8suZbaGvU0l0nRN9kcAzul3FdmGrlgUixe');
 
-INSERT INTO user_roles (username, roles) VALUES (1, 'USER');
-INSERT INTO user_roles (username, roles) VALUES (2, 'USER');
-INSERT INTO user_roles (username, roles) VALUES (2, 'ADMIN');
-INSERT INTO user_roles (username, roles) VALUES (3, 'ADMIN');
+INSERT INTO user_roles (user_id, roles) VALUES (1, 'USER');
+INSERT INTO user_roles (user_id, roles) VALUES (2, 'USER');
+INSERT INTO user_roles (user_id, roles) VALUES (2, 'ADMIN');
+INSERT INTO user_roles (user_id, roles) VALUES (3, 'ADMIN');
 
 -- Insert Brands
 INSERT INTO brands (name, description) VALUES ('Renault', 'French automobile manufacturer');
